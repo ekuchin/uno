@@ -7,7 +7,7 @@ export default createStore({
   state: {
     currentCard: {} as Card,
     deck: [] as Card[], //Array of Cards
-    isClockwise: true,
+    isClockwise: true, 
     players: [] as Array<Array<Card>>,
   },
   
@@ -21,10 +21,13 @@ export default createStore({
   },
    
   mutations: {
+    emptyDeck(state){
+      state.deck=[]
+    },
     addCardToDeck(state, payload){
       state.deck.push(payload)
     }
-    //removeCardToDeck()
+    //removeCardFromDeck()
     //setCurrentCard(card)
     //addCardToPlayer(card)
     //removeCardFromPlayer(index)
@@ -64,13 +67,22 @@ export default createStore({
         for (const rank in arr) {
           context.commit('addCardToDeck', {rank:arr[rank], color:Color.Black})
         }
-      }
-      //console.log(EnumToArray(Color));    
+      }   
     },
     
     //Перетасовать колоду
     shuffleDeck (context) {
-            
+      console.log("shuffle")
+      const tmparr:Card[] = context.getters.getDeck.slice()
+      context.commit('emptyDeck')      
+      
+      while (tmparr.length>0){
+        const index = Math.floor(Math.random() * tmparr.length);
+        context.commit('addCardToDeck', tmparr[index])
+        tmparr.splice(index,1)
+        console.log(tmparr.length)
+      }     
+    console.log(context.getters.getDeck)
     }
     
     //Переместить N карт игроку M из колоды

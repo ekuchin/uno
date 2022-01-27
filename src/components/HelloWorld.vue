@@ -1,17 +1,22 @@
 <template>
   <div class="hello">
-    <h3>{{ deck }}</h3>
     <h3>{{ deck.length }}</h3>
-    <button @click="myclick">Press me</button>
-  </div>
+    <button v-show="deck.length===0" @click="clickGenerate">Generate</button>
+    <button @click="clickShuffle">Shuffle</button>
+    <div v-for="(card, index) in deck" :key="index">
+      <Card :color="card.color" :rank="card.rank" />
+    </div>
+   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import {Color} from "@/model/Card";
 import { useStore } from "vuex";
+import Card from "./Card.vue";
 
 export default defineComponent({
+  components: { Card },
   name: "HelloWorld",
   props: {
     msg: String,
@@ -19,11 +24,13 @@ export default defineComponent({
   setup(){
     const store = useStore();
    
-//    const card = computed(()=>store.state.card);
-   
     return {
-      myclick: () => store.dispatch('generateNewDeck'),
-      deck: computed(() => store.state.deck),
+      clickGenerate: () => {
+        //store.commit('emptyDeck')
+        store.dispatch('generateNewDeck')
+        },
+      clickShuffle:()=> store.dispatch('shuffleDeck'),
+      deck: computed(() => store.getters.getDeck),
     }
   }
 });

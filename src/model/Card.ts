@@ -24,10 +24,8 @@ export enum Rank {
     SelectColor
 }
 
-export function EnumToArray(arr:any){
-  
+export function EnumToArray(arr:any){ 
   return Object.keys(arr).filter(value => isNaN(Number(value)) === true)
-
 }
 
 export default interface Card {
