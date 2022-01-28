@@ -1,12 +1,12 @@
 <template>
   <div class="hello">
-     <button @click="startGame">Start Game</button>
-   </div>
+    <button @click="startGame">Start Game</button>
+  </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import {Color} from "@/model/Card";
+import { Color } from "@/model/Card";
 import { useStore } from "vuex";
 //import Card from "./Card.vue";
 
@@ -14,18 +14,18 @@ export default defineComponent({
   //components: { Card },
   name: "Start",
   props: {},
-  setup(){
-    const store = useStore();   
-    
+  setup() {
+    const store = useStore();
+
     const startGame = () => {
-        store.commit('emptyDeck')
-        store.dispatch('generateNewDeck')
-        store.dispatch('shuffleDeck')
-        store.commit('startGame')
-    }
-    
-    return { startGame }
-  }
+      store.commit("emptyDeck");
+      store.dispatch("generateNewDeck");
+      store.dispatch("shuffleDeck");
+      store.commit("startGame");
+    };
+
+    return { startGame };
+  },
 });
 </script>
 

@@ -1,8 +1,8 @@
-import Card from "@/model/Card"
+import Card from "@/model/Card";
 
 export default interface Player {
-    name: String;
-    cards: Card[];
-    points: Number;
-    isHuman: Boolean;
-  }
+  name: string;
+  cards: Card[];
+  points: number;
+  isHuman: boolean;
+}

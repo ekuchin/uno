@@ -1,12 +1,13 @@
 <template>
   <div class="hello">
+    <Player></Player>
     <h3>{{ deck.length }}</h3>
     <button @click="clickShuffle">Shuffle</button>
     <button @click="stopGame">Stop Game</button>
     <div v-for="(card, index) in deck" :key="index">
       <Card :color="card.color" :rank="card.rank" />
     </div>
-   </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -14,20 +15,22 @@ import { computed, defineComponent } from "vue";
 //import {Color} from "@/model/Card";
 import { useStore } from "vuex";
 import Card from "./Card.vue";
+import Player from "./Player.vue";
 
 export default defineComponent({
-  components: { Card },
+  components: { Card, Player },
+
   name: "Game",
   props: {},
-  setup(){
+  setup() {
     const store = useStore();
-   
+
     return {
-      clickShuffle:()=> store.dispatch('shuffleDeck'),
-      stopGame: ()=> store.commit('stopGame'),
+      clickShuffle: () => store.dispatch("shuffleDeck"),
+      stopGame: () => store.commit("stopGame"),
       deck: computed(() => store.getters.getDeck),
-    }
-  }
+    };
+  },
 });
 </script>
 

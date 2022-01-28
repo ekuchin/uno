@@ -1,7 +1,7 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <Game v-if="isGameStarted"/>
-  <Start v-else/>
+  <Game v-if="isGameStarted" />
+  <Start v-else />
 </template>
 
 <script lang="ts">
@@ -13,14 +13,15 @@ import Start from "./components/Start.vue";
 export default defineComponent({
   name: "App",
   components: {
-    Start, Game,
+    Start,
+    Game,
   },
-  setup(){
+  setup() {
     const store = useStore();
     return {
-      isGameStarted: computed(() => store.getters.isGameStarted)
-    }
-  }
+      isGameStarted: computed(() => store.getters.isGameStarted),
+    };
+  },
 });
 </script>
 
