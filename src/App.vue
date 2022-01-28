@@ -1,17 +1,26 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <Game v-if="isGameStarted"/>
+  <Start v-else/>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import { computed, defineComponent } from "vue";
+import { useStore } from "vuex";
+import Game from "./components/Game.vue";
+import Start from "./components/Start.vue";
 
 export default defineComponent({
   name: "App",
   components: {
-    HelloWorld,
+    Start, Game,
   },
+  setup(){
+    const store = useStore();
+    return {
+      isGameStarted: computed(() => store.getters.isGameStarted)
+    }
+  }
 });
 </script>
 

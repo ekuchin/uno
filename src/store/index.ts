@@ -1,26 +1,39 @@
 import { createStore } from "vuex";
 import Card from "@/model/Card";
 import { Rank, Color, EnumToArray } from "@/model/Card";
+import Player from "@/model/Player";
 
 export default createStore({
   
-  state: {
-    currentCard: {} as Card,
+  state: {    
     deck: [] as Card[], //Array of Cards
-    isClockwise: true, 
-    players: [] as Array<Array<Card>>,
+    players: [] as Player[],
+    game:{
+      isStarted: false,
+      currentCard: {} as Card,
+      isClockwise: true,      
+    }
   },
   
   getters: {
     getCurrentCard(state):Card {
-      return state.currentCard;
+      return state.game.currentCard;
     },
     getDeck(state):Card[] {
       return state.deck;
+    },
+    isGameStarted(state): boolean {
+      return state.game.isStarted
     }
   },
    
   mutations: {
+    startGame(state){
+      state.game.isStarted=true
+    },
+    stopGame(state){
+      state.game.isStarted=false
+    },
     emptyDeck(state){
       state.deck=[]
     },
