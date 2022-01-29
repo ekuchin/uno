@@ -1,11 +1,13 @@
 <template>
   <div class="hello">
-    <Player></Player>
+    <div v-for="(player, index) in players" :key="index">
+      <Player :player="player" />
+    </div>
     <h3>{{ deck.length }}</h3>
     <button @click="clickShuffle">Shuffle</button>
-    <button @click="stopGame">Stop Game</button>
+    <button @click="finishGame">Finish Game</button>
     <div v-for="(card, index) in deck" :key="index">
-      <Card :color="card.color" :rank="card.rank" />
+      <Card :card="card" />
     </div>
   </div>
 </template>
@@ -27,8 +29,9 @@ export default defineComponent({
 
     return {
       clickShuffle: () => store.dispatch("shuffleDeck"),
-      stopGame: () => store.commit("stopGame"),
+      finishGame: () => store.dispatch("finishGame"),
       deck: computed(() => store.getters.getDeck),
+      players: computed(() => store.getters.getPlayers)
     };
   },
 });

@@ -8,18 +8,18 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, PropType } from "vue";
 import Player from "@/model/Player";
 
 export default defineComponent({
   name: "Player",
-  props: {},
-  setup(props) {
-    const player: Player = {} as Player;
-    player.name = "Евгений";
-
-    return { player };
+  props: {
+    player: {
+      type: Object as PropType<Player>,
+      required: true,
+    },
   },
+  //setup(props) {},
 });
 </script>
 

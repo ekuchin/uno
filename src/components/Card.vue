@@ -2,28 +2,27 @@
   <div class="card">
     <div :class="cardStyle()">
       <p>{{ cardStyle() }}</p>
-      <p>Значение: {{ rank }}</p>
-      <p>Цвет: {{ color }}</p>
+      <p>Значение: {{ card.rank }}</p>
+      <p>Цвет: {{ card.color }}</p>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { Color, EnumToArray } from "@/model/Card";
+import { computed, defineComponent, PropType } from "vue";
+import Card, { Color, EnumToArray } from "@/model/Card";
 
 export default defineComponent({
   name: "Card",
   props: {
-    color: {
-      type: Number,
+    card: {
+      type: Object as PropType<Card>,
       required: true,
     },
-    rank: Number,
   },
   setup(props) {
     function cardStyle() {
-      return "card " + EnumToArray(Color)[props.color].toLowerCase();
+      return "card " + EnumToArray(Color)[props.card.color].toLowerCase();
     }
 
     return { cardStyle };

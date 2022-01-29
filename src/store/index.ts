@@ -24,6 +24,9 @@ export default createStore({
     isGameStarted(state): boolean {
       return state.game.isStarted;
     },
+    getPlayers(state): Player[] {
+      return state.players;
+    },
   },
 
   mutations: {
@@ -39,6 +42,12 @@ export default createStore({
     addCardToDeck(state, payload) {
       state.deck.push(payload);
     },
+    addPlayer(state, payload:Player){
+      state.players.push(payload)
+    },
+    clearPlayers(state){
+      state.players = []
+    }
     //removeCardFromDeck()
     //setCurrentCard(card)
     //addCardToPlayer(card)
@@ -94,7 +103,13 @@ export default createStore({
         tmparr.splice(index, 1);
       }
     },
-
+    startGame(context){
+      console.log("//TODO start game ?")
+    },
+    finishGame(context) {
+      context.commit('clearPlayers')
+      context.commit('stopGame')
+    },
     //Переместить N карт игроку M из колоды
   },
   modules: {},

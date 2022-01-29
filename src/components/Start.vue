@@ -7,6 +7,7 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import { Color } from "@/model/Card";
+import Player, { createPlayer } from "@/model/Player";
 import { useStore } from "vuex";
 //import Card from "./Card.vue";
 
@@ -21,6 +22,7 @@ export default defineComponent({
       store.commit("emptyDeck");
       store.dispatch("generateNewDeck");
       store.dispatch("shuffleDeck");
+      store.commit('addPlayer', createPlayer("Евгений", true))
       store.commit("startGame");
     };
 
